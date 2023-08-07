@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native'
+import { View, Text,SafeAreaView } from 'react-native'
+import tw from 'twrnc';
 import React from 'react'
 
 const RemoveTodo = () => {
   return (
-    <View>
-      <Text>RemoveTodo</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text style={tw`text-black`}>RemoveTodo</Text>
+      </View>
+    </SafeAreaView>
   )
 }
 
