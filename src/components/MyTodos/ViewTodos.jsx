@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import tw from 'twrnc';
 import axios from 'axios';
@@ -13,7 +13,9 @@ const TaskCard = ({ title, description, isComplete, createdAt, updatedAt }) => {
     <View style={tw`bg-white rounded-lg p-4 mb-4 shadow`}>
       <Text style={tw`text-black text-lg font-bold`}>{title}</Text>
       <Text style={tw`text-gray-600 mb-2`}>{description}</Text>
-      <Text style={tw`text-gray-400 mb-1`}>{isComplete ? 'Completed' : 'Incomplete'}</Text>
+      <Text style={[tw`mb-1`, isComplete ? tw`text-green-500` : tw`text-red-500`]}>
+        {isComplete ? 'Completed' : 'Incomplete'}
+      </Text>
       <Text style={tw`text-gray-400 mb-1`}>Created At: {formatDateTime(createdAt)}</Text>
       <Text style={tw`text-gray-400`}>Updated At: {formatDateTime(updatedAt)}</Text>
     </View>
@@ -37,19 +39,21 @@ const ViewTodos = () => {
   }, []);
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-white`}>
+    <SafeAreaView style={tw`flex-1`}>
       <View style={tw`p-4`}>
         <Text style={tw`text-black text-2xl font-bold mb-4`}>View Todos</Text>
-        {todos.map(todo => (
-          <TaskCard
-            key={todo._id}
-            title={todo.title}
-            description={todo.description}
-            isComplete={todo.isComplete}
-            createdAt={todo.createdAt}
-            updatedAt={todo.updatedAt}
-          />
-        ))}
+        <ScrollView style={tw`mb-10`}>
+          {todos.map(todo => (
+            <TaskCard
+              key={todo._id}
+              title={todo.title}
+              description={todo.description}
+              isComplete={todo.isComplete}
+              createdAt={todo.createdAt}
+              updatedAt={todo.updatedAt}
+            />
+          ))}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
