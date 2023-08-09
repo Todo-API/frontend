@@ -4,10 +4,11 @@ import tw from 'twrnc';
 import axios from 'axios';
 
 const AddTodo = () => {
+  // State variables to store the todo title and description
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  // Handle creating a new todo
+  // Function to handle creating a new todo
   const handleCreate = async () => {
     try {
       const response = await axios.post('http://192.168.0.101:8080/api/v1/todos', {
@@ -21,29 +22,38 @@ const AddTodo = () => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={tw`bg-white rounded-lg p-4 m-4 mb-4 shadow`}>
-        <Text style={tw`text-black text-lg font-bold mb-2`}>Create Todo</Text>
-        <TextInput
-          style={tw`border border-black p-2 mb-2 text-black`}
-          placeholder="Title"
-          placeholderTextColor="black" // Set placeholder text color
-          value={title}
-          onChangeText={setTitle}
-        />
-        <TextInput
-          style={tw`border border-black p-2 mb-4 text-black`}
-          placeholder="Description"
-          placeholderTextColor="black" // Set placeholder text color
-          value={description}
-          onChangeText={setDescription}
-        />
-        <TouchableOpacity
-          style={tw`bg-blue-500 p-2 rounded`}
-          onPress={handleCreate} // Call handleCreate when the button is pressed
-        >
-          <Text style={tw`text-white text-center`}>Create</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={tw`flex-1`}>
+      <View style={tw`flex-1 bg-gray-100 p-4 justify-center`}>
+        <View style={tw`bg-white rounded-lg p-6 shadow`}>
+          {/* Title */}
+          <Text style={tw`text-black text-2xl font-bold mb-4`}>Create Todo</Text>
+          
+          {/* Title Input */}
+          <TextInput
+            style={tw`border border-gray-300 rounded p-3 mb-3 text-black`}
+            placeholder="Title"
+            placeholderTextColor="gray" // Set placeholder text color
+            value={title}
+            onChangeText={setTitle}
+          />
+          
+          {/* Description Input */}
+          <TextInput
+            style={tw`border border-gray-300 rounded p-3 mb-6 text-black`}
+            placeholder="Description"
+            placeholderTextColor="gray" // Set placeholder text color
+            value={description}
+            onChangeText={setDescription}
+          />
+          
+          {/* Create Button */}
+          <TouchableOpacity
+            style={tw`bg-blue-500 p-3 rounded`}
+            onPress={handleCreate}
+          >
+            <Text style={tw`text-white text-center text-lg`}>Create</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
