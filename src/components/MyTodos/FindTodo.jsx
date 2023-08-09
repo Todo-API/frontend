@@ -9,11 +9,10 @@ const FindTodo = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`http://192.168.0.100:8080/api/v1/todos/64ce5bdf7e4311c8fa03a773`);
-      setSearchResults(data.data);
-      console.log(data.data)
+      const response = await axios.get('http://192.168.0.101:8080/api/v1/todos/');
+      setSearchResults(response.data.data); // Handle the response data here
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error:', error);
     }
   };
 
@@ -21,14 +20,14 @@ const FindTodo = () => {
     fetchData();
   }, []);
 
-  const handleSearch = async () => {
-    try {
-      const { data } = await axios.get(`http://192.168.0.100:8080/api/v1/todos/${searchQuery}`);
-      setSearchResults(data.data);
-    } catch (error) {
-      console.error('Error searching data:', error);
-    }
-  };
+  // const handleSearch = async () => {
+  //   try {
+  //     const response = await axios.get(`http://192.168.24.12:8080/api/v1/todos/64ce5bdf7e4311c8fa03a773}`);
+  //     setSearchResults(response.data.data);
+  //   } catch (error) {
+  //     console.error('Error searching data:', error);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={tw`flex-1 bg-gray-100`}>
@@ -42,7 +41,7 @@ const FindTodo = () => {
         />
         <TouchableOpacity
           style={tw`bg-blue-500 p-3 rounded`}
-          onPress={handleSearch}
+          // onPress={handleSearch}
         >
           <Text style={tw`text-white text-center font-bold`}>Search</Text>
         </TouchableOpacity>

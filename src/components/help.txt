@@ -1,0 +1,7 @@
+{/* <RemoveTodo
+                todo={todo} // Pass the todo object
+                onDelete={(deletedTodoId) => {
+                  // Define a function to update the UI after deletion
+                  setTodos(prevTodos => prevTodos.filter(todo => todo._id !== deletedTodoId));
+                }}
+              /> */}
