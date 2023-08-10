@@ -18,7 +18,7 @@ const ViewTodos = () => {
   const { fetchData } = useTasks()
 
   useEffect( async () => {
-    console.log("I ran ")
+    // console.log("I ran ")
     setTodos( await fetchData())
   }, [])
 
