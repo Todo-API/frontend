@@ -11,7 +11,7 @@ const AddTodo = () => {
   // Function to handle creating a new todo
   const handleCreate = async () => {
     try {
-      const response = await axios.post('http://192.168.0.101:8080/api/v1/todos', {
+      const response = await axios.post('http://192.168.83.12:8080/api/v1/todos', {
         title,
         description,
       });

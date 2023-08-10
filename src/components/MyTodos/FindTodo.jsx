@@ -9,7 +9,7 @@ const FindTodo = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://192.168.0.101:8080/api/v1/todos/');
+      const response = await axios.get('http://192.168.83.12:8080/api/v1/todos/');
       setSearchResults(response.data.data); // Handle the response data here
     } catch (error) {
       console.error('Error:', error);

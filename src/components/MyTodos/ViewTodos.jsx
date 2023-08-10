@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, ScrollView, RefreshControl } from 'react-native';
 import tw from 'twrnc';
-import axios from 'axios';
-import RemoveTodo from '../RemoveTodo';
-import TodoContext from './TodoContext';
+// import axios from 'axios';
+import { useTasks } from '../../Context/TodoContext';
+
 
 // Format the date and time
 const formatDateTime = (dateTimeString) => {
@@ -14,16 +14,23 @@ const formatDateTime = (dateTimeString) => {
 const ViewTodos = () => {
   const [todos, setTodos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  
+  const { fetchData } = useTasks()
+
+  useEffect( async () => {
+    console.log("I ran ")
+    setTodos( await fetchData())
+  }, [])
 
   // Fetch data from the API
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://192.168.0.101:8080/api/v1/todos');
-      setTodos(response.data.data); // Update the todos state with response data
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get('http://192.168.83.12:8080/api/v1/todos');
+  //     setTodos(response.data.data); // Update the todos state with response data
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
 
   // Handle the refresh action
   const handleRefresh = async () => {
@@ -47,9 +54,9 @@ const ViewTodos = () => {
     );
   };
 
-  useEffect(() => {
-    fetchData(); // Fetch data when the component mounts
-  }, []);
+  // useEffect(() => {
+  //   fetchData(); // Fetch data when the component mounts
+  // }, []);
 
   return (
     <SafeAreaView style={tw`flex-1`}>
@@ -62,16 +69,14 @@ const ViewTodos = () => {
           }
         >
           {todos.map((todo) => (
-            <TodoContext.Provider key={todo._id} value={todo}>
-              <TaskCard
-                key={todo._id}
-                title={todo.title}
-                description={todo.description}
-                isComplete={todo.isComplete}
-                createdAt={todo.createdAt}
-                updatedAt={todo.updatedAt}
-              />
-            </TodoContext.Provider>
+            <TaskCard
+              key={todo._id}
+              title={todo.title}
+              description={todo.description}
+              isComplete={todo.isComplete}
+              createdAt={todo.createdAt}
+              updatedAt={todo.updatedAt}
+            />
           ))}
         </ScrollView>
       </View>
