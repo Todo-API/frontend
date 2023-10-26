@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, ScrollView, RefreshControl } from 'react-native';
 import tw from 'twrnc';
+import LinearGradient from 'react-native-linear-gradient';
 // import axios from 'axios';
 import { useTasks } from '../../Context/TodoContext';
 
@@ -18,7 +19,7 @@ const ViewTodos = () => {
   const { fetchData } = useTasks()
 
   useEffect( async () => {
-    // console.log("I ran ")
+    console.log("I ran ")
     setTodos( await fetchData())
   }, [])
 
@@ -60,26 +61,29 @@ const ViewTodos = () => {
 
   return (
     <SafeAreaView style={tw`flex-1`}>
-      <View style={tw`p-4`}>
-        <Text style={tw`text-black text-2xl font-bold mb-4`}>View Todos</Text>
-        <ScrollView
-          style={tw`mb-10`}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-          }
-        >
-          {todos.map((todo) => (
-            <TaskCard
-              key={todo._id}
-              title={todo.title}
-              description={todo.description}
-              isComplete={todo.isComplete}
-              createdAt={todo.createdAt}
-              updatedAt={todo.updatedAt}
-            />
-          ))}
-        </ScrollView>
-      </View>
+      <LinearGradient locations={[0,0.1,0.6]}
+  colors={['#4c669f', '#3b5998', '#192f6a']}>
+        <View style={tw`p-4`}>
+          <Text style={tw`text-black text-2xl font-bold mb-4`}>View Todos</Text>
+          <ScrollView
+            style={tw`mb-15`}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+            }
+          >
+            {todos.map((todo) => (
+              <TaskCard
+                key={todo._id}
+                title={todo.title}
+                description={todo.description}
+                isComplete={todo.isComplete}
+                createdAt={todo.createdAt}
+                updatedAt={todo.updatedAt}
+              />
+            ))}
+          </ScrollView>
+        </View>
+      </LinearGradient>
     </SafeAreaView>
   );
 };

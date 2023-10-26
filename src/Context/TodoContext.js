@@ -12,10 +12,9 @@ export function TodoProvider({ children }) {
     const [debug, setDebug] = useState("Hii")
     const [todos, setTodos] = useState([]);
 
-    const fetchData = async (num) => {
+    const fetchData = async () => {
         try {
             const response = await axios.get('http://192.168.0.101:8080/api/v1/todos');
-            console.log("a number"+num)
             return (response.data.data); 
         } catch (error) {
             console.error('Error:', error);
@@ -27,7 +26,7 @@ export function TodoProvider({ children }) {
           const response = await axios.delete(`http://192.168.0.101:8080/api/v1/todos/${_id}`);
           console.log('Delete response:', response);
           // setTodos(response.data.data);
-          return response.data.data;
+          return (response.data.data);
         } catch (error) {
           console.error('Error deleting todo:', error);
         }

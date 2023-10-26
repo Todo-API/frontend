@@ -18,18 +18,13 @@ const Tab = createMaterialBottomTabNavigator();
 const App = () => {
   return (
     <TodoProvider>
-
       <SafeAreaProvider>
         {/* Wrap the entire app inside SafeAreaProvider to handle safe areas for different devices */}
         <NavigationContainer>
           {/* Set up the NavigationContainer to manage the navigation state */}
           <Tab.Navigator
-            screenOptions={{
-              // Customize the appearance of the bottom tabs
-              tabBarActiveColor: 'black',
-              tabBarInactiveColor: 'gray',
-              tabBarStyle: tw`bg-white`,
-            }}
+            activeColor="black"
+            inactiveColor="gray"
           >
             <Tab.Screen
               name="View"

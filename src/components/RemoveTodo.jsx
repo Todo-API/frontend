@@ -23,8 +23,9 @@ const RemoveTodo = () => {
 
   useEffect(async () => {
     console.log("I ran fetch")
-    setTodos(await fetchData(1))
+    setTodos(await fetchData())
   }, [])
+
   useEffect(async () => {
     console.log("I ran delete")
     await deleteData(_id);
